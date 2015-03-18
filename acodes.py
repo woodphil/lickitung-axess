@@ -1,12 +1,9 @@
 # imports
 
-import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template
-
 from flask.ext.sqlalchemy import SQLAlchemy
 
-from models import Acode
-from a_forms import AcodeForm
+#from models import Acode
 
 import pdb
 import csv
@@ -37,14 +34,20 @@ db = SQLAlchemy(app)
 
 #db init
 def init_db2():
+    from models import Acode
+
+    db.drop_all()
+    db.session.commit()
+    db.create_all()
+    db.session.commit()
+
     with open('ocodes_raw.csv', 'rb') as csvfile:
         ocode_read = csv.reader(csvfile, delimiter=',')
         for row in ocode_read:
             print row[0]
             temp_code = Acode(row[0], row[1])
             db.session.add(temp_code)
-
-    db.session.commit()
+            db.session.commit()
 
 # db methods
 def connect_db():
@@ -66,6 +69,8 @@ def front_page():
 
 @app.route('/code', methods=['GET'])
 def redirect_code():
+
+    from a_forms import AcodeForm
     form = AcodeForm()
     ocode = request.args['code']
     cur = g.db.execute('select resource from acode where id=?', [ocode])
