@@ -13,9 +13,9 @@ a:hover {
 .btn-default,
 .btn-default:hover,
 .btn-default:focus {
-  color: #333;
+  color: #fff;
   text-shadow: none; /* Prevent inheritence from `body` */
-  background-color: #fff;
+  background-color: #51476e;
   border: 1px solid #fff;
 }
 
@@ -27,12 +27,12 @@ a:hover {
 html,
 body {
   height: 100%;
-  background-color: #333;
+  background-color: #fff;
 }
 body {
-  color: #fff;
+  color: #51476e;
   text-align: center;
-  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+  //text-shadow: 0 1px 3px rgba(0,0,0,.5);
 }
 
 .form-control {
@@ -61,6 +61,10 @@ body {
 /* Padding for spacing */
 .inner {
   padding: 30px;
+}
+
+.container img {
+    margin: 1.5em 0 0 0;
 }
 
 
@@ -118,6 +122,8 @@ body {
   padding: 0 20px;
 }
 .cover .btn-lg {
+  background-color: #51476e;
+  color: #fff;
   padding: 10px 20px;
   font-weight: bold;
 }
@@ -130,6 +136,19 @@ body {
 .mastfoot {
   color: #999; /* IE8 proofing */
   color: rgba(255,255,255,.5);
+}
+
+.footer {
+    background-color: #eee;
+    bottom: 0;
+    height: 60px;
+    position: absolute;
+    width: 100%;
+    padding: 1.5em;
+}
+
+footer p {
+    color: #ccc;
 }
 
 
