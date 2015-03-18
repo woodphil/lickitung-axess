@@ -62,18 +62,18 @@ def init_db2():
 def index():
     from a_forms import AcodeForm
     form = AcodeForm()
-    return render_template('front.html', form=form)
+    return render_template('front.html', form=form, error=False)
 
-@app.route('/code', methods=['GET'])
+@app.route('/code', methods=['POST'])
 def redirect_code():
 
     from a_forms import AcodeForm
     from models import Acode
     form = AcodeForm()
-    ocode = request.args['code']
+    ocode = request.form['code']
     redir_url = Acode.query.filter_by(id=ocode).first()
     if redir_url is None:
-        abort(404)
+        return render_template('front.html', form=form, error=True)
     else:
         return redirect(redir_url.resource)
 #    return redir_url

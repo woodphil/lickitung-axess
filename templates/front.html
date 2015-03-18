@@ -15,11 +15,17 @@
 
 </head>
 <body>
-    <h1>Welcome to AxessCapon Codes</h1>
-    <form action="/code" class="form-inline" method="get" accept-charset="utf-8">
+    <img src="{{ url_for('static', filename='img/ac-logo.png') }}">
+    <h1>Welcome to AxcessCapon Codes</h1>
+    <form action="/code" {% if error %} class="form-inline has-error" {% else %} class="form-inline" {% endif %} method="post" accept-charset="utf-8">
         {{ form.csrf_token }}
-        <input type="text" class="form-control" name="code" placeholder="Code">
+        <input type="text" class="form-control" name="code" placeholder="Code" aria-describedby="helpBlock">
         <button class="btn btn btn-default" type="submit">Submit</button>
+        {% if error %}
+        <span id="helpBlock" class="help-block">
+            Invalid code, please check if your code is correct
+        </span>
+        {% endif %}
     </form>
 
     <script type="text/javascript" charset="utf-8">
