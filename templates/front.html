@@ -17,7 +17,7 @@
 <body>
     <div class="container">
         <img class="logo" src="{{ url_for('static', filename='img/ac-logo.png') }}">
-        <h1>Welcome to AxcessCapon Codes</h1>
+        <h1>Welcome to Axcess Capon Codes</h1>
         <form action="/code" {% if error %} class="form-inline has-error" {% else %} class="form-inline" {% endif %} method="post" accept-charset="utf-8">
             {{ form.csrf_token }}
             <input type="text" class="form-control" name="code" placeholder="Code" aria-describedby="helpBlock">
