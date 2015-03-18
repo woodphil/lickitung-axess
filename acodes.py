@@ -1,11 +1,6 @@
-# imports
-
 from flask import Flask, request, session, g, redirect, url_for, abort, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 
-#from models import Acode
-
-import pdb
 import csv
 import os
 
@@ -50,35 +45,37 @@ def init_db2():
             db.session.commit()
 
 # db methods
-def connect_db():
-    return sqlite3.connect(app.config['DATABASE'])
+#def connect_db():
+#    return sqlite3.connect(app.config['DATABASE'])
 
-@app.before_request
-def before_request():
-    g.db = connect_db()
+#@app.before_request
+#def before_request():
+#    g.db = connect_db()
 
-@app.teardown_request
-def teardown_request(exception):
-    db = getattr(g, 'db', None)
-    if db is not None:
-        db.close()
+#@app.teardown_request
+#def teardown_request(exception):
+#    db = getattr(g, 'db', None)
+#    if db is not None:
+#        db.close()
 
 @app.route('/')
-def front_page():
-    return render_template('front.html')
+def index():
+    from a_forms import AcodeForm
+    form = AcodeForm()
+    return render_template('front.html', form=form)
 
 @app.route('/code', methods=['GET'])
 def redirect_code():
 
     from a_forms import AcodeForm
+    from models import Acode
     form = AcodeForm()
     ocode = request.args['code']
-    cur = g.db.execute('select resource from acode where id=?', [ocode])
-    redir_url = cur.fetchone()
+    redir_url = Acode.query.filter_by(id=ocode).first()
     if redir_url is None:
         abort(404)
     else:
-        return redirect(redir_url[0])
+        return redirect(redir_url.resource)
 #    return redir_url
 
 if __name__ == '__main__':
