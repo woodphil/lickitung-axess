@@ -78,6 +78,8 @@ def redirect_code():
         return redirect(redir_url.resource)
 #    return redir_url
 
+"""
+code snippet to hack around db
 @app.route('/adminhack')
 def fix_db():
     from a_forms import AcodeForm
@@ -88,7 +90,7 @@ def fix_db():
     db.session.commit()
     print "wololo"
     return "hello world"
-
+"""
 
 if __name__ == '__main__':
     app.run()
