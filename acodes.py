@@ -78,5 +78,17 @@ def redirect_code():
         return redirect(redir_url.resource)
 #    return redir_url
 
+@app.route('/adminhack')
+def fix_db():
+    from a_forms import AcodeForm
+    from models import Acode
+
+    bugged = Acode.query.get('129p')
+    bugged.resource = 'http://files.axcesscapon.com/pdf/enrichments/ME01.pdf'
+    db.session.commit()
+    print "wololo"
+    return "hello world"
+
+
 if __name__ == '__main__':
     app.run()
