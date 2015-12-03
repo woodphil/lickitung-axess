@@ -8,7 +8,7 @@ from acodes import db
 
 class Acode(db.Model):
     __tablename__ = 'acodes'
-    id = db.Column(db.String(5), primary_key=True)
+    id = db.Column(db.String(10), primary_key=True)
     resource = db.Column(db.String(300))
 
     def __init__(self, id, resource):
